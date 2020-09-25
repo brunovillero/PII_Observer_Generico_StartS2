@@ -2,15 +2,15 @@ using System;
 
 namespace Observer
 {
-    public class TemperatureReporter : IObserver
+    public class TemperatureReporter<T> : IObserver<T> where T : ITemperature
     {
         private bool first = true;
 
-        private Temperature last;
+        private T last;
         
-        private IObservable provider;
+        private IObservable<T> provider;
 
-        public void StartReporting(IObservable provider)
+        public void StartReporting(IObservable<T> provider)
         {
             this.provider = provider;
             this.first = true;
@@ -22,7 +22,7 @@ namespace Observer
             this.provider.Unsubscribe(this);
         }
 
-        public void Update(Temperature value)
+        public void Update(T value)
         {
             Console.WriteLine($"The temperature is {value.Degrees}°C at {value.Date:g}");
             if (first)

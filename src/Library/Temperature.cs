@@ -2,7 +2,7 @@ using System;
 
 namespace Observer
 {
-    public struct Temperature
+    public struct Temperature : ITemperature
     {
         private decimal degrees;
 
